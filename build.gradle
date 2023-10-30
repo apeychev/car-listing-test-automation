@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'idea'
+}
+
+java {
+    //Set Java version '-source release' and '-target release' in javac
+    sourceCompatibility = 17
+    targetCompatibility = 17
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    junitVersion = '5.9.2'
+    jacksonVersion = '2.15.1'
+    log4jVersion = '2.20.0'
+}
+
+dependencies {
+    testImplementation 'io.rest-assured:rest-assured:5.3.0'
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testImplementation 'org.junit.platform:junit-platform-suite-engine:1.10.0-M1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.10.0-M1'
+
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+    runtimeOnly "org.apache.logging.log4j:log4j-core:$log4jVersion"
+
+    implementation "org.apache.logging.log4j:log4j-api:$log4jVersion"
+    implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
+    implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+}
+
+test {
+    useJUnitPlatform()
+}
